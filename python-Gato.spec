@@ -8,7 +8,7 @@ Group:		Development/Python
 License:	LGPL
 Summary:	Python Gato module
 Version:	%{version}
-Release:	%mkrel 1
+Release:	%mkrel 2
 # svn co https://gato.svn.sourceforge.net/svnroot/gato/trunk/Gato Gato
 # tar jcvf Gato-0.`date +%\Y%\m%\d`.tar.bz
 Source:		Gato-%{version}.tar.bz2
@@ -37,6 +37,11 @@ terms of blinking, changing colors and other visual effects.
 %setup -q -n Gato
 
 %build
+# don't add .svn files to doc files.
+for dir in `find . -type d -name .svn`; do
+    rm -fr $dir
+done
+
 for f in `find . -name \*.py`; do
     sed -i -e 's|#!/usr/bin/env python2.3|#!/usr/bin/env python|' $f
 done
@@ -45,6 +50,10 @@ done
 %__python setup.py install --root=%{buildroot} --record=INSTALLED_FILES
 mkdir -p %{buildroot}/%{pkgdir}
 cp -far Icons %{buildroot}/%{pkgdir}
+
+# remove broken program
+sed -i 's|%{_bindir}/Gato3D||' INSTALLED_FILES
+rm -f %{buildroot}%{_bindir}/Gato3D
 
 %clean
 %__rm -rf %{buildroot}
