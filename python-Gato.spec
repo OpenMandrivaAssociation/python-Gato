@@ -8,7 +8,7 @@ Group:		Development/Python
 License:	LGPL
 Summary:	Python Gato module
 Version:	%{version}
-Release:	%mkrel 2
+Release:	%mkrel 3
 # svn co https://gato.svn.sourceforge.net/svnroot/gato/trunk/Gato Gato
 # tar jcvf Gato-0.`date +%\Y%\m%\d`.tar.bz
 Source:		Gato-%{version}.tar.bz2
