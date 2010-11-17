@@ -1,25 +1,15 @@
-%define name	python-Gato
-%define version	0.20090311
-
-%define	pkgdir	%{_datadir}/%{name}
-
-Name:		%{name}
+Name:		python-Gato
 Group:		Development/Python
-License:	LGPL
+License:	LGPLv2
 Summary:	Python Gato module
-Version:	%{version}
-Release:	%mkrel 3
-# svn co https://gato.svn.sourceforge.net/svnroot/gato/trunk/Gato Gato
-# tar jcvf Gato-0.`date +%\Y%\m%\d`.tar.bz
-Source:		Gato-%{version}.tar.bz2
+Version:	1.02
+Release:	%mkrel 1
+Source:		http://gato.sourceforge.net/Download/Gato-%{version}.tar.gz
 URL:		http://gato.sourceforge.net/index.html
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
-BuildRequires:	python-devel
 Requires:	tcl >= 8.6
 Requires:	tk >= 8.6
 Requires:	tkinter
-Requires:	python-imaging
 
 %description
 Gato - the Graph Animation Toolbox - is a software which visualizes
@@ -35,31 +25,27 @@ terms of blinking, changing colors and other visual effects.
 
 %prep
 %setup -q -n Gato
-
-%build
-# don't add .svn files to doc files.
-for dir in `find . -type d -name .svn`; do
-    rm -fr $dir
-done
-
-for f in `find . -name \*.py`; do
-    sed -i -e 's|#!/usr/bin/env python2.3|#!/usr/bin/env python|' $f
-done
+sed -i -e 's:self.overrideredirect(1):self.overrideredirect(0):' GatoDialogs.py
 
 %install
-%__python setup.py install --root=%{buildroot} --record=INSTALLED_FILES
-mkdir -p %{buildroot}/%{pkgdir}
-cp -far Icons %{buildroot}/%{pkgdir}
+rm -fr %buildroot
+mkdir -p %buildroot%{py_platsitedir}/Gato
+cp *.py %buildroot%{py_platsitedir}/Gato
 
-# remove broken program
-sed -i 's|%{_bindir}/Gato3D||' INSTALLED_FILES
-rm -f %{buildroot}%{_bindir}/Gato3D
+mkdir -p %buildroot%{_bindir}
+pushd %buildroot%{_bindir}
+ln -s %{py_platsitedir}/Gato/Gato.py gato
+ln -s %{py_platsitedir}/Gato/Gred.py gred
+popd
+
+mkdir -p %buildroot%{_datadir}/Gato
+cp BFS.* DFS.* sample.cat %buildroot%{_datadir}/Gato
 
 %clean
 %__rm -rf %{buildroot}
 
-%files -f INSTALLED_FILES
+%files
 %defattr(-,root,root)
-%dir %{pkgdir}
-%{pkgdir}/*
-%doc WWW
+%{_bindir}/*
+%{py_platsitedir}/*
+%{_datadir}/Gato
