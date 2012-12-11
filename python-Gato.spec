@@ -49,3 +49,25 @@ cp BFS.* DFS.* sample.cat %buildroot%{_datadir}/Gato
 %{_bindir}/*
 %{py_platsitedir}/*
 %{_datadir}/Gato
+
+
+%changelog
+* Wed Nov 17 2010 Funda Wang <fwang@mandriva.org> 1.02-1mdv2011.0
++ Revision: 598144
+- new version 1.02
+
+* Tue Sep 15 2009 Thierry Vignaud <tv@mandriva.org> 0.20090311-3mdv2010.0
++ Revision: 442121
+- rebuild
+
+* Fri Mar 20 2009 Paulo Andrade <pcpa@mandriva.com.br> 0.20090311-2mdv2009.1
++ Revision: 359266
+- Don't add .svn directory to %%doc and don't install a known broken script.
+
+* Wed Mar 18 2009 Paulo Andrade <pcpa@mandriva.com.br> 0.20090311-1mdv2009.1
++ Revision: 357022
+- Initial import of python-Gato
+  http://gato.sourceforge.net/index.html
+  Gato - the Graph Animation Toolbox
+- python-Gato
+
