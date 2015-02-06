@@ -3,7 +3,7 @@ Group:		Development/Python
 License:	LGPLv2
 Summary:	Python Gato module
 Version:	1.02
-Release:	%mkrel 1
+Release:	2
 Source:		http://gato.sourceforge.net/Download/Gato-%{version}.tar.gz
 URL:		http://gato.sourceforge.net/index.html
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
