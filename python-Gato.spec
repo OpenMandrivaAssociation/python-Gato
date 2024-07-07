@@ -2,14 +2,15 @@ Name:		python-Gato
 Group:		Development/Python
 License:	LGPLv2
 Summary:	Python Gato module
-Version:	1.02
-Release:	2
-Source:		http://gato.sourceforge.net/Download/Gato-%{version}.tar.gz
+Version:	1.2.7
+Release:	1
+Source:		https://files.pythonhosted.org/packages/source/G/Gato/Gato-%{version}.tar.gz
 URL:		http://gato.sourceforge.net/index.html
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	tcl >= 8.6
 Requires:	tk >= 8.6
 Requires:	tkinter
+BuildRequires:	python
+BuildArch:	noarch
 
 %description
 Gato - the Graph Animation Toolbox - is a software which visualizes
@@ -24,7 +25,7 @@ an effect - changes to the graph the algorithm has as its input - by
 terms of blinking, changing colors and other visual effects.
 
 %prep
-%setup -q -n Gato
+%autosetup -p1 -n Gato-%{version}
 sed -i -e 's:self.overrideredirect(1):self.overrideredirect(0):' GatoDialogs.py
 
 %install
@@ -41,33 +42,8 @@ popd
 mkdir -p %buildroot%{_datadir}/Gato
 cp BFS.* DFS.* sample.cat %buildroot%{_datadir}/Gato
 
-%clean
-%__rm -rf %{buildroot}
-
 %files
 %defattr(-,root,root)
 %{_bindir}/*
 %{py_platsitedir}/*
 %{_datadir}/Gato
-
-
-%changelog
-* Wed Nov 17 2010 Funda Wang <fwang@mandriva.org> 1.02-1mdv2011.0
-+ Revision: 598144
-- new version 1.02
-
-* Tue Sep 15 2009 Thierry Vignaud <tv@mandriva.org> 0.20090311-3mdv2010.0
-+ Revision: 442121
-- rebuild
-
-* Fri Mar 20 2009 Paulo Andrade <pcpa@mandriva.com.br> 0.20090311-2mdv2009.1
-+ Revision: 359266
-- Don't add .svn directory to %%doc and don't install a known broken script.
-
-* Wed Mar 18 2009 Paulo Andrade <pcpa@mandriva.com.br> 0.20090311-1mdv2009.1
-+ Revision: 357022
-- Initial import of python-Gato
-  http://gato.sourceforge.net/index.html
-  Gato - the Graph Animation Toolbox
-- python-Gato
-
