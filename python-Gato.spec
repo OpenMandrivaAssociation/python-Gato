@@ -5,7 +5,7 @@ Summary:	Python Gato module
 Version:	1.2.7
 Release:	1
 Source:		https://files.pythonhosted.org/packages/source/G/Gato/Gato-%{version}.tar.gz
-URL:		http://gato.sourceforge.net/index.html
+URL:		https://gato.sourceforge.net/index.html
 Requires:	tcl >= 8.6
 Requires:	tk >= 8.6
 Requires:	tkinter
