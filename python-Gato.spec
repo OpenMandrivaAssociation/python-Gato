@@ -3,7 +3,7 @@ Group:		Development/Python
 License:	LGPLv2
 Summary:	Python Gato module
 Version:	1.2.7
-Release:	2
+Release:	3
 Source:		https://files.pythonhosted.org/packages/source/G/Gato/Gato-%{version}.tar.gz
 URL:		https://gato.sourceforge.net/index.html
 Requires:	tcl >= 8.6
